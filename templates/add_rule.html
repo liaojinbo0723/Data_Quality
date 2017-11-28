@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+    <th style="background-color: aquamarine;color: black;">添加规则</th>
+
+    <form action="{% url 'dqc:add_rule'%}" method="POST">
+    {% csrf_token %}
+        <tr>应用名称:         <input type="text" name="app_name" /></tr><br>
+        <tr>作业名称:         <input type="text" name="job_name" /></tr><br>
+        <tr>库名:            <input type="text" name="db_name" /></tr><br>
+        <tr>表名:            <input type="text" name="table_name" /></tr><br>
+        <tr>文件路径:         <input type="text" name="file_dir" /></tr><br>
+        <tr>统计字段名:       <input type="text" name="static_column" /></tr><br>
+        <tr>报错预警:         <input type="text" name="error_alarm" /></tr><br>
+        <tr>出数时间预警(星期):<input type="text" name="date_week" /></tr><br>
+        <tr>出数时间预警(小时):<input type="text" name="date_alarm" /></tr><br>
+        <tr>责任人:           <input type="text" name="owner" /></tr><br>
+        <tr>责任人手机号:      <input type="text" name="mobile" /></tr><br>
+        <tr>有效标识:         <input type="text" name="valid_flag" /></tr><br>
+        <tr><input type="submit" value="提交" /></tr><br>
+    </form>
+
+</body>
+</html>
