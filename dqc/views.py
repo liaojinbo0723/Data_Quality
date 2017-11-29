@@ -17,9 +17,9 @@ def index(request):
 		"dqc_list":dqc_list
 	}
 
-	pn = Paginator(dqc_list, 15)
-	page = request.GET.get('page', 1)
-	cur_page = int(page)
+	# pn = Paginator(dqc_list, 15)
+	# page = request.GET.get('page', 1)
+	# cur_page = int(page)
 
 	return render(request, "index.html", context)
 

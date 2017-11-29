@@ -6,7 +6,8 @@
     <form action='/dqc/edit_rule?nid={{ dqc_list.id }}' method="POST">
     {% csrf_token %}
         <style>
-        p { height:20px; line-height:20px;}
+        p { height:25px; line-height:25px;}
+        input {type:"text";width:250px;height:25px;maxlength:"200"}
         </style>
         <div  style="width:200px; float:left;margin-left:100px">
             <p>应用名称：*</p>
@@ -22,20 +23,20 @@
             <p>责任人手机号：*</p>
             <p>有效标识：*</p>
         </div>
-        <div  style="width:200px; float:left">
-            <p><input type="text" name="app_name" required maxlength="200" value="{{ dqc_list.app_name }}" /></p>
-            <p><input type="text" name="job_name" required maxlength="200" value="{{ dqc_list.job_name }}"/></p>
-            <p><input type="text" name="db_name" required maxlength="200" value="{{ dqc_list.db_name }}"/></p>
-            <p><input type="text" name="table_name" required maxlength="200" value="{{ dqc_list.table_name }}"/></p>
-            <p><input type="text" name="file_dir" required maxlength="200" value="{{ dqc_list.file_dir }}"/></p>
-            <p><input type="text" name="static_column" required maxlength="200" value="{{ dqc_list.static_column }}"/></p>
-            <p><input type="text" name="error_alarm" required maxlength="200" value="{{ dqc_list.error_alarm }}"/></p>
-            <p><input type="text" name="date_week" required maxlength="200" value="{{ dqc_list.date_week }}"/></p>
-            <p><input type="text" name="date_alarm" required maxlength="200" value="{{ dqc_list.date_alarm }}"/></p>
-            <p><input type="text" name="owner" required maxlength="200" value="{{ dqc_list.owner }}"/></p>
-            <p><input type="text" name="mobile" required maxlength="200" value="{{ dqc_list.mobile }}"/></p>
-            <p><input type="text" name="valid_flag" required maxlength="200" value="{{ dqc_list.valid_flag }}"/></p>
-            <p><input type="submit" value="提交" /></p>
+        <div  style="width:500px; float:left">
+            <p><input  name="app_name"  value="{{ dqc_list.app_name }}" /></p>
+            <p><input  name="job_name"  value="{{ dqc_list.job_name }}"/></p>
+            <p><input  name="db_name"  value="{{ dqc_list.db_name }}"/></p>
+            <p><input  name="table_name"  value="{{ dqc_list.table_name }}"/></p>
+            <p><input  name="file_dir"  value="{{ dqc_list.file_dir }}"/></p>
+            <p><input  name="static_column"  value="{{ dqc_list.staticfsd_column }}"/></p>
+            <p><input  name="error_alarm"  value="{{ dqc_list.error_alarm }}"/></p>
+            <p><input  name="date_week"  value="{{ dqc_list.date_week }}"/></p>
+            <p><input  name="date_alarm"  value="{{ dqc_list.date_alarm }}"/></p>
+            <p><input  name="owner"  value="{{ dqc_list.owner }}"/></p>
+            <p><input  name="mobile"  value="{{ dqc_list.mobile }}"/></p>
+            <p><input  name="valid_flag"  value="{{ dqc_list.valid_flag }}"/></p>
+            <p><input type="submit" style="width:120px" value="保存" /></p>
         </div>
     </form>
 

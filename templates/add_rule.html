@@ -6,9 +6,10 @@
     <form action='/dqc/add_rule' method="POST">
     {% csrf_token %}
         <style>
-        p { height:20px; line-height:20px;}
+        p { height:25px; line-height:25px;}
+        input {type:"text";width:250px;height:25px;maxlength:"200"}
         </style>
-        <div  style="width:200px; float:left ;margin-left:100px;">
+        <div  style="width:200px; float:left;margin-left:100px">
             <p>应用名称：*</p>
             <p>作业名称：*</p>
             <p>库名：*</p>
@@ -22,20 +23,20 @@
             <p>责任人手机号：*</p>
             <p>有效标识：*</p>
         </div>
-        <div  style="width:200px; float:left;">
-            <p><input type="text" name="app_name" required maxlength="200" /></p>
-            <p><input type="text" name="job_name" required maxlength="200" /></p>
-            <p><input type="text" name="db_name" required maxlength="200" /></p>
-            <p><input type="text" name="table_name" required maxlength="200" /></p>
-            <p><input type="text" name="file_dir" required maxlength="200" /></p>
-            <p><input type="text" name="static_column" required maxlength="200" /></p>
-            <p><input type="text" name="error_alarm" required maxlength="200" /></p>
-            <p><input type="text" name="date_week" required maxlength="200" /></p>
-            <p><input type="text" name="date_alarm" required maxlength="200" /></p>
-            <p><input type="text" name="owner" required maxlength="200" /></p>
-            <p><input type="text" name="mobile" required maxlength="200" /></p>
-            <p><input type="text" name="valid_flag" required maxlength="200" /></p>
-            <p><input type="submit" value="提交" /></p>
+        <div  style="width:500px; float:left">
+            <p><input  name="app_name"  /></p>
+            <p><input  name="job_name"  /></p>
+            <p><input  name="db_name"  /></p>
+            <p><input  name="table_name"  /></p>
+            <p><input  name="file_dir"  /></p>
+            <p><input  name="static_column"  /></p>
+            <p><input  name="error_alarm"  /></p>
+            <p><input  name="date_week"  /></p>
+            <p><input  name="date_alarm" /></p>
+            <p><input  name="owner"  /></p>
+            <p><input  name="mobile" /></p>
+            <p><input  name="valid_flag"  /></p>
+            <p><input  type="submit" style="width:120px" value="保存" /></p>
         </div>
 
     </form>
