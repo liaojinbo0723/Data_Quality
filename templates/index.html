@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 <div>
-    <div class="text-center">
-        <a href="/dqc/add_rule" style="text-decoration:none;white-space:nowrap;font-size: larger">添加规则</a>
-    </div>
+    <form action="/dqc/add_rule" method="get">
+        <div class="form-group" style="margin-left: 400px">
+            <input type="submit" class="btn btn-info" value="添加规则"/>
+        </div>
+    </form>
+
     <br>
     <table class="table table-bordered table-striped mb-none" id="datatable-editable">
         <tr>
