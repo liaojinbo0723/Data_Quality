@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+
+
+    <form action='/dqc/edit_rule?nid={{ dqc_list.id }}' method="POST">
+    {% csrf_token %}
+        <style>
+        p { height:20px; line-height:20px;}
+        </style>
+        <div  style="width:200px; float:left;margin-left:100px">
+            <p>应用名称：*</p>
+            <p>作业名称：*</p>
+            <p>库名：*</p>
+            <p>表名：*</p>
+            <p>文件路径：*</p>
+            <p>统计字段名：*</p>
+            <p>报错预警：*</p>
+            <p>出数时间预警(星期)：*</p>
+            <p>出数时间预警(小时)：*</p>
+            <p>责任人：*</p>
+            <p>责任人手机号：*</p>
+            <p>有效标识：*</p>
+        </div>
+        <div  style="width:200px; float:left">
+            <p><input type="text" name="app_name" required maxlength="200" value="{{ dqc_list.app_name }}" /></p>
+            <p><input type="text" name="job_name" required maxlength="200" value="{{ dqc_list.job_name }}"/></p>
+            <p><input type="text" name="db_name" required maxlength="200" value="{{ dqc_list.db_name }}"/></p>
+            <p><input type="text" name="table_name" required maxlength="200" value="{{ dqc_list.table_name }}"/></p>
+            <p><input type="text" name="file_dir" required maxlength="200" value="{{ dqc_list.file_dir }}"/></p>
+            <p><input type="text" name="static_column" required maxlength="200" value="{{ dqc_list.static_column }}"/></p>
+            <p><input type="text" name="error_alarm" required maxlength="200" value="{{ dqc_list.error_alarm }}"/></p>
+            <p><input type="text" name="date_week" required maxlength="200" value="{{ dqc_list.date_week }}"/></p>
+            <p><input type="text" name="date_alarm" required maxlength="200" value="{{ dqc_list.date_alarm }}"/></p>
+            <p><input type="text" name="owner" required maxlength="200" value="{{ dqc_list.owner }}"/></p>
+            <p><input type="text" name="mobile" required maxlength="200" value="{{ dqc_list.mobile }}"/></p>
+            <p><input type="text" name="valid_flag" required maxlength="200" value="{{ dqc_list.valid_flag }}"/></p>
+            <p><input type="submit" value="提交" /></p>
+        </div>
+    </form>
+
+</div>
+{% endblock content %}

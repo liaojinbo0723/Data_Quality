@@ -1,23 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>test</title>
-</head>
-<body>
-    <h1 style="background-color: aquamarine;color: black;">数据质量规则</h1>
-    <div>
-    <a href="/dqc/add_rule/">添加</a>
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <div class="text-center">
+        <a href="/dqc/add_rule" style="text-decoration:none;white-space:nowrap;font-size: larger">添加规则</a>
     </div>
-    <table border=1px>
+    <br>
+    <table class="table table-bordered table-striped mb-none" id="datatable-editable">
         <tr>
             <th>规则id</th>
             <th>应用名称</th>
             <th>作业名称</th>
             <th>库名</th>
             <th>表名</th>
-            <th>文件路径</th>
-            <th>统计字段名</th>
+{#            <th>文件路径</th>#}
+{#            <th>统计字段名</th>#}
             <th>报错预警</th>
             <th>出数时间预警:星期</th>
             <th>出数时间预警:小时</th>
@@ -35,17 +31,21 @@
             <td>{{ dqc.job_name }}</td>
             <td>{{ dqc.db_name }}</td>
             <td>{{ dqc.table_name }}</td>
-            <td>{{ dqc.file_dir }}</td>
-            <td>{{ dqc.static_column }}</td>
+{#            <td>{{ dqc.file_dir }}</td>#}
+{#            <td>{{ dqc.static_column }}</td>#}
             <td>{{ dqc.error_alarm }}</td>
             <td>{{ dqc.date_week }}</td>
             <td>{{ dqc.date_alarm }}</td>
             <td>{{ dqc.owner }}</td>
             <td>{{ dqc.mobile }}</td>
             <td>{{ dqc.valid_flag }}</td>
-            <td> <a href="/dqc/del_rule?nid={{ dqc.id }}">删除</a></td>
+            <td> <a href="/dqc/del_rule?nid={{ dqc.id }}">删除</a>
+                |
+                 <a href="/dqc/edit_rule?nid={{ dqc.id }}">编辑</a>
+            </td>
+
         </tr>
         {% endfor %}
         </table>
-</body>
-</html>
+</div>
+{% endblock content %}
