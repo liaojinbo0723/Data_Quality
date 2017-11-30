@@ -118,6 +118,7 @@ def dqc_search(request):
 	if text == None or text == "":
 		dqc_list = Alarmconf.objects.all()
 	else:
+		"""多条件模糊匹配"""
 		dqc_list = Alarmconf.objects.filter(Q(app_name__icontains=text)|Q(job_name__icontains=text)|Q(db_name__icontains=text)|Q(table_name__icontains=text)|Q(owner__icontains=text)|Q(mobile__icontains=text))
 
 	pn = Paginator(dqc_list, 12)
