@@ -17,11 +17,19 @@ def index(request):
 		"dqc_list":dqc_list
 	}
 
-	# pn = Paginator(dqc_list, 15)
-	# page = request.GET.get('page', 1)
-	# cur_page = int(page)
+	pn = Paginator(dqc_list, 12)
+	page = request.GET.get('page', 1)
+	cur_page = int(page)
 
-	return render(request, "index.html", context)
+	try:
+		print(page)
+		dqc_list = pn.page(page)
+	except PageNotAnInteger:
+		dqc_list = pn.page(1)
+	except EmptyPage:
+		dqc_list = pn.page(pn.num_pages)
+	"""locals()返回的字典对所有局部变量的名称与值进行映射"""
+	return render(request, "index.html", locals())
 
 def dqc_base(request):
 	dqc_list = Alarmconf.objects.all()

@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 <div>
-    <form action="/dqc/add_rule" method="get">
-        <div class="form-group" style="margin-left: 400px">
-            <input type="submit" class="btn btn-info" value="添加规则"/>
-        </div>
-    </form>
-
+    <div>
+        <form action="/dqc/add_rule" method="get">
+            <div class="form-group" style="text-align: center">
+                <input type="submit" class="btn btn-info" value="添加规则"/>
+            </div>
+        </form>
+    </div>
     <br>
-    <table class="table table-bordered table-striped mb-none" id="datatable-editable">
+    <table class="table table-bordered table-striped table-hover mb-none" id="datatable-editable">
+        <style>
+            th,td {text-align: center}
+        </style>
         <tr>
             <th>规则id</th>
             <th>应用名称</th>
@@ -27,28 +31,57 @@
         </tr>
 
         {% for dqc in dqc_list %}
-        <tr>
+        <tr >
 
-            <td>{{ dqc.id }}</td>
-            <td>{{ dqc.app_name }}</td>
+            <td class="active" >{{ dqc.id }}</td>
+            <td class="success"> {{ dqc.app_name }}</td>
 {#            <td>{{ dqc.job_name }}</td>#}
-            <td>{{ dqc.db_name }}</td>
-            <td>{{ dqc.table_name }}</td>
+            <td class="info">{{ dqc.db_name }}</td>
+            <td class="active">{{ dqc.table_name }}</td>
 {#            <td>{{ dqc.file_dir }}</td>#}
 {#            <td>{{ dqc.static_column }}</td>#}
-            <td>{{ dqc.error_alarm }}</td>
+            <td class="success">{{ dqc.error_alarm }}</td>
 {#            <td>{{ dqc.date_week }}</td>#}
-            <td>{{ dqc.date_alarm }}</td>
-            <td>{{ dqc.owner }}</td>
-            <td>{{ dqc.mobile }}</td>
-            <td>{{ dqc.valid_flag }}</td>
-            <td> <a href="/dqc/del_rule?nid={{ dqc.id }}">删除</a>
+            <td class="info">{{ dqc.date_alarm }}</td>
+            <td class="active">{{ dqc.owner }}</td>
+            <td class="success">{{ dqc.mobile }}</td>
+            <td class="info">{{ dqc.valid_flag }}</td>
+            <td class="active" style="text-align: center">
+                <a class="btn btn-info" href="/dqc/del_rule?nid={{ dqc.id }}">删除</a>
                 |
-                 <a href="/dqc/edit_rule?nid={{ dqc.id }}">编辑</a>
+                <a class="btn btn-info" href="/dqc/edit_rule?nid={{ dqc.id }}">编辑</a>
             </td>
 
         </tr>
         {% endfor %}
+
         </table>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {% if dqc_list.has_previous %}
+                <li>
+                  <a href="?page={{ dqc_list.previous_page_number }}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+            {% endif %}
+
+            {% for pg in dqc_list.paginator.page_range %}
+                {% if cus_list.number == pg %}
+                    <li class="active"><a href="?page={{ pg }}">{{ pg }}</a></li>
+                {% else %}
+                    <li><a href="?page={{ pg }}">{{ pg }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if dqc_list.has_next %}
+                <li>
+                    <a href="?page={{ dqc_list.next_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
 </div>
 {% endblock content %}
