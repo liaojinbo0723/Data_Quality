@@ -7,6 +7,7 @@ from .models import Alarmconf
 from django.template import loader
 from django.shortcuts import redirect
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.db.models import Q
 
 # Create your views here.
 
@@ -109,3 +110,31 @@ def dqc_edit(request):
 												valid_flag = valid_flag)
 		return redirect('/dqc')
 
+
+def dqc_search(request):
+	text = request.GET.get('a')
+	# print "text:{}".format(text)
+	# print request.get_full_path()
+	if text == None or text == "":
+		dqc_list = Alarmconf.objects.all()
+	else:
+		dqc_list = Alarmconf.objects.filter(Q(app_name__icontains=text)|Q(job_name__icontains=text)|Q(db_name__icontains=text)|Q(table_name__icontains=text)|Q(owner__icontains=text)|Q(mobile__icontains=text))
+
+	pn = Paginator(dqc_list, 12)
+	page = request.GET.get('page', 1)
+	cur_page = int(page)
+
+	try:
+		print(page)
+		dqc_list = pn.page(page)
+	except PageNotAnInteger:
+		dqc_list = pn.page(1)
+	except EmptyPage:
+		dqc_list = pn.page(pn.num_pages)
+	"""这里要把搜索框的关键字传给前端,不然搜索翻页会有问题"""
+	context = {
+		"dqc_list": dqc_list,
+		"param_input": text
+	}
+	"""locals()返回的字典对所有局部变量的名称与值进行映射"""
+	return render(request, "index.html", context)

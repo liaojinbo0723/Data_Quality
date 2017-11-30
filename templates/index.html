@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 <div>
-    <div>
-        <form action="/dqc/add_rule" method="get">
+    <div style="overflow: hidden;width: fit-content;margin: auto;">
+        <form class="navbar-form navbar-left" action="/dqc/add_rule" method="get">
             <div class="form-group" style="text-align: center">
-                <input type="submit" class="btn btn-info" value="添加规则"/>
+                <input type="submit" class="btn btn-info" value="添加规则">
             </div>
         </form>
+        <form class="navbar-form navbar-left" action="/dqc/search">
+            <div class="form-group">
+                <input value="{{ param_input }}" type="text" name="a" class="form-control" placeholder="Search">
+                <input type="submit" class="btn btn-info" value="搜索">
+            </div>
+        </form>
+        <div style="clear:both" > </div>
     </div>
-    <br>
+
     <table class="table table-bordered table-striped table-hover mb-none" id="datatable-editable">
         <style>
             th,td {text-align: center}
@@ -60,23 +67,23 @@
         <ul class="pagination">
             {% if dqc_list.has_previous %}
                 <li>
-                  <a href="?page={{ dqc_list.previous_page_number }}" aria-label="Previous">
+                  <a href="?page={{ dqc_list.previous_page_number }}&a={{ param_input }}" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                   </a>
                 </li>
             {% endif %}
 
             {% for pg in dqc_list.paginator.page_range %}
-                {% if cus_list.number == pg %}
-                    <li class="active"><a href="?page={{ pg }}">{{ pg }}</a></li>
+                {% if pg.number == pg %}
+                    <li class="active"><a href="?page={{ pg }}&a={{ param_input }}">{{ pg }}</a></li>
                 {% else %}
-                    <li><a href="?page={{ pg }}">{{ pg }}</a></li>
+                    <li><a href="?page={{ pg }}&a={{ param_input }}">{{ pg }}</a></li>
                 {% endif %}
             {% endfor %}
 
             {% if dqc_list.has_next %}
                 <li>
-                    <a href="?page={{ dqc_list.next_page_number }}" aria-label="Previous">
+                    <a href="?page={{ dqc_list.next_page_number }}&a={{ param_input }}" aria-label="Previous">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
