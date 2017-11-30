@@ -18,3 +18,10 @@ class Alarmconf(models.Model):
 	owner = models.CharField(max_length=50)
 	mobile = models.CharField(max_length=50)
 	valid_flag = models.CharField(max_length=50)
+
+class UserInfo(models.Model):
+	user_name = models.CharField(max_length=20)
+	user_pass = models.CharField(max_length=20)
+	is_admin = models.BigIntegerField()
+	create_time = models.DateTimeField(auto_now_add=True)
+	update_time = models.DateTimeField(auto_now=True)

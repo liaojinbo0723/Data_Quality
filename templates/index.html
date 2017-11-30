@@ -3,11 +3,13 @@
 <div>
     <div style="overflow: hidden;width: fit-content;margin: auto;">
         <form class="navbar-form navbar-left" action="/dqc/add_rule" method="get">
+            {% csrf_token %}
             <div class="form-group" style="text-align: center">
                 <input type="submit" class="btn btn-info" value="添加规则">
             </div>
         </form>
         <form class="navbar-form navbar-left" action="/dqc/search">
+            {% csrf_token %}
             <div class="form-group">
                 <input value="{{ param_input }}" type="text" name="a" class="form-control" placeholder="Search">
                 <input type="submit" class="btn btn-info" value="搜索">
@@ -55,7 +57,6 @@
             <td class="info">{{ dqc.valid_flag }}</td>
             <td class="active" style="text-align: center">
                 <a class="btn btn-info" href="/dqc/del_rule?nid={{ dqc.id }}">删除</a>
-                |
                 <a class="btn btn-info" href="/dqc/edit_rule?nid={{ dqc.id }}">编辑</a>
             </td>
 

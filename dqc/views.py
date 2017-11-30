@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
-from .models import Alarmconf
+from .models import Alarmconf,UserInfo
 from django.template import loader
 from django.shortcuts import redirect
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -12,13 +12,13 @@ from django.db.models import Q
 # Create your views here.
 
 
-def index(request):
-	dqc_list = Alarmconf.objects.all()
-	context = {
-		"dqc_list":dqc_list
-	}
 
-	pn = Paginator(dqc_list, 12)
+
+def index(request):
+	print request.get_full_path()
+	dqc_list = Alarmconf.objects.all()
+
+	pn = Paginator(list(dqc_list), 12)
 	page = request.GET.get('page', 1)
 	cur_page = int(page)
 
@@ -29,20 +29,32 @@ def index(request):
 		dqc_list = pn.page(1)
 	except EmptyPage:
 		dqc_list = pn.page(pn.num_pages)
-	"""locals()返回的字典对所有局部变量的名称与值进行映射"""
-	return render(request, "index.html", locals())
-
-def dqc_base(request):
-	dqc_list = Alarmconf.objects.all()
 	context = {
 		"dqc_list": dqc_list
 	}
-	return render(request, "base.html", context)
+	"""locals()返回的字典对所有局部变量的名称与值进行映射"""
+	return render(request, "index.html", context)
+
+def dqc_login(request):
+	print request.method
+	if request.method == "GET":
+		return render(request,"login.html")
+	elif request.method == "POST":
+		username = request.POST.get("username")
+		password = request.POST.get("password")
+		res = UserInfo.objects.filter(user_name=username,user_pass=password).count()
+		if res == 1:
+			return redirect("/dqc/index")
+		else:
+			content = {
+				"login_check":"login failed!!!"
+			}
+			return render(request,"login.html",content)
 
 def dqc_del(request):
 	nid = request.GET.get('nid')
 	Alarmconf.objects.filter(id=nid).delete()
-	return redirect('/dqc')
+	return redirect('/dqc/index')
 
 def dqc_add(request):
 	if request.method == "GET":
@@ -72,7 +84,7 @@ def dqc_add(request):
 								 owner = owner,
 								 mobile = mobile,
 								 valid_flag = valid_flag)
-		return redirect('/dqc')
+		return redirect('/dqc/index')
 
 def dqc_edit(request):
 	if request.method == "GET":
@@ -108,7 +120,7 @@ def dqc_edit(request):
 												owner = owner,
 												mobile = mobile,
 												valid_flag = valid_flag)
-		return redirect('/dqc')
+		return redirect('/dqc/index')
 
 
 def dqc_search(request):
