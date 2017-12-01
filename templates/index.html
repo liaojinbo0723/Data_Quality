@@ -2,13 +2,13 @@
 {% block content %}
 <div>
     <div style="overflow: hidden;width: fit-content;margin: auto;">
-        <form class="navbar-form navbar-left" action="/dqc/add_rule" method="get">
+        <form class="navbar-form navbar-left" action="{% url 'dqc:add' %}" method="get">
             {% csrf_token %}
             <div class="form-group" style="text-align: center">
                 <input type="submit" class="btn btn-info" value="添加规则">
             </div>
         </form>
-        <form class="navbar-form navbar-left" action="/dqc/search">
+        <form class="navbar-form navbar-left" action="{% url 'dqc:search' %}">
             {% csrf_token %}
             <div class="form-group">
                 <input value="{{ param_input }}" type="text" name="a" class="form-control" placeholder="Search">
@@ -56,8 +56,8 @@
             <td class="success">{{ dqc.mobile }}</td>
             <td class="info">{{ dqc.valid_flag }}</td>
             <td class="active" style="text-align: center">
-                <a class="btn btn-info" href="/dqc/del_rule?nid={{ dqc.id }}">删除</a>
-                <a class="btn btn-info" href="/dqc/edit_rule?nid={{ dqc.id }}">编辑</a>
+                <a class="btn btn-info" href="{% url 'dqc:del' %}?nid={{ dqc.id }}">删除</a>
+                <a class="btn btn-info" href="{% url 'dqc:edit' %}?nid={{ dqc.id }}">编辑</a>
             </td>
 
         </tr>
@@ -76,7 +76,7 @@
 
             {% for pg in dqc_list.paginator.page_range %}
                 {% if pg.number == pg %}
-                    <li class="active"><a href="?page={{ pg }}&a={{ param_input }}">{{ pg }}</a></li>
+                    <span class="current">{{ pg }}</span>
                 {% else %}
                     <li><a href="?page={{ pg }}&a={{ param_input }}">{{ pg }}</a></li>
                 {% endif %}

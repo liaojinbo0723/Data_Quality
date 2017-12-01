@@ -27,7 +27,7 @@
 
         <div class="page-container">
             <h1 style="font-family: '微软雅黑 Light'">Data Management System</h1>
-            <form action="/dqc/" method="post" class="navbar-form">
+            <form action="{% url 'dqc:login' %}" method="post" class="navbar-form">
                 {% csrf_token %}
                 <input type="text" name="username" style="font-family: '微软雅黑 Light'" placeholder="Username">
                 <input type="password" name="password" style="font-family: '微软雅黑 Light'" placeholder="Password">

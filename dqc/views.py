@@ -2,9 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.shortcuts import HttpResponse
 from .models import Alarmconf,UserInfo
-from django.template import loader
 from django.shortcuts import redirect
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.db.models import Q
@@ -15,7 +13,6 @@ from django.db.models import Q
 
 
 def index(request):
-	print request.get_full_path()
 	dqc_list = Alarmconf.objects.all()
 
 	pn = Paginator(list(dqc_list), 12)
@@ -44,7 +41,7 @@ def dqc_login(request):
 		if request.POST.has_key("login"):
 			res = UserInfo.objects.filter(user_name=username,user_pass=password).count()
 			if res == 1:
-				return redirect("/dqc/index")
+				return redirect("dqc:index")
 			else:
 				content = {
 					"login_check":"login failed!!!"
@@ -69,7 +66,7 @@ def dqc_login(request):
 def dqc_del(request):
 	nid = request.GET.get('nid')
 	Alarmconf.objects.filter(id=nid).delete()
-	return redirect('/dqc/index')
+	return redirect('dqc:index')
 
 def dqc_add(request):
 	if request.method == "GET":
@@ -99,7 +96,7 @@ def dqc_add(request):
 								 owner = owner,
 								 mobile = mobile,
 								 valid_flag = valid_flag)
-		return redirect('/dqc/index')
+		return redirect('dqc:index')
 
 def dqc_edit(request):
 	if request.method == "GET":
@@ -135,7 +132,7 @@ def dqc_edit(request):
 												owner = owner,
 												mobile = mobile,
 												valid_flag = valid_flag)
-		return redirect('/dqc/index')
+		return redirect('dqc:index')
 
 
 def dqc_search(request):

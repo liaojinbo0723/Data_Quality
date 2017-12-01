@@ -3,6 +3,7 @@
 from django.conf.urls import url
 from . import views
 
+app_name = "dqc"
 urlpatterns = [
 	url(r'^$', views.dqc_login, name='login'),
 	url(r'^del_rule$', views.dqc_del, name='del'),

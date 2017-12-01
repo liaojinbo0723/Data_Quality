@@ -3,7 +3,7 @@
 
 <div>
 
-    <form action='/dqc/add_rule' method="POST">
+    <form action='{% url 'dqc:add' %}' method="POST">
     {% csrf_token %}
         <style>
         p { height:25px; line-height:25px;}

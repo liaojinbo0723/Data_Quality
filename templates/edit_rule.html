@@ -3,7 +3,7 @@
 <div>
 
 
-    <form action='/dqc/edit_rule?nid={{ dqc_list.id }}' method="POST">
+    <form action='{% url 'dqc:edit' %}?nid={{ dqc_list.id }}' method="POST">
     {% csrf_token %}
         <style>
         p { height:25px; line-height:25px;}
