@@ -20,7 +20,7 @@ class Alarmconf(models.Model):
 	valid_flag = models.CharField(max_length=50)
 
 class UserInfo(models.Model):
-	user_name = models.CharField(max_length=20)
+	user_name = models.CharField(max_length=20,unique=True)
 	user_pass = models.CharField(max_length=20)
 	is_admin = models.BigIntegerField()
 	create_time = models.DateTimeField(auto_now_add=True)

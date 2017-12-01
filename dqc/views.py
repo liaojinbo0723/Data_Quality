@@ -36,20 +36,35 @@ def index(request):
 	return render(request, "index.html", context)
 
 def dqc_login(request):
-	print request.method
 	if request.method == "GET":
 		return render(request,"login.html")
 	elif request.method == "POST":
 		username = request.POST.get("username")
 		password = request.POST.get("password")
-		res = UserInfo.objects.filter(user_name=username,user_pass=password).count()
-		if res == 1:
-			return redirect("/dqc/index")
+		if request.POST.has_key("login"):
+			res = UserInfo.objects.filter(user_name=username,user_pass=password).count()
+			if res == 1:
+				return redirect("/dqc/index")
+			else:
+				content = {
+					"login_check":"login failed!!!"
+				}
+				return render(request,"login.html",content)
 		else:
-			content = {
-				"login_check":"login failed!!!"
-			}
-			return render(request,"login.html",content)
+			res = UserInfo.objects.filter(user_name=username).count()
+			if res == 1:
+				content = {
+					"login_check": "User already exists!!!"
+				}
+				return render(request, "login.html", content)
+			else:
+				UserInfo.objects.create(user_name=username, user_pass=password,is_admin=1)
+				content = {
+					"login_check": "register successful!!!"
+				}
+				return render(request, "login.html", content)
+
+
 
 def dqc_del(request):
 	nid = request.GET.get('nid')
